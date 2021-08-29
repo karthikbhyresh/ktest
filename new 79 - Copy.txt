@@ -1,0 +1,27 @@
+https://techcommunity.microsoft.com/t5/azure-data-factory/new-data-flow-functions-for-dynamic-reusable-patterns/bc-p/1506720/highlight/true#M188
+
+#new addition to branch
+
+
+The documentation for the byNames function states 'Computed inputs are not supported but you can use parameter substitutions'.  This explains why you should use a parameter as input to create the array used in the byNames function:
+ 
+Example: Where $cols parameter hold the list of columns.
+
+sha2(256,byNames(split($cols,',')))
+
+So use an array parameter $cols....
+
+$cols = sort(slice(columnNames(), 1, size(columnNames()) - 1), compare(#item1, #item2))
+
+toString(byNames(sort(slice($cols, compare(#item1, #item2))))
+
+
+You can use computed columns as input by creating the computed columns prior to using in function. Instead of creating the expression in-line in the function call, set the column values in a Derived Column prior and then use those computed columns in your function directly afterwards.
+
+
+
+Refer: byNames
+
+
+https://docs.microsoft.com/en-us/azure/data-factory/data-flow-expression-functions#:~:text=functions%20(toDate%2C%20toString%2C%20...).-,Column%20names%20known%20at%20design%20time%20should%20be%20addressed%20just%20by%20their%20name.%20Computed%20inputs%20are%20not%20supported%20but%20you%20can%20use%20parameter%20substitutions.,-toString(byNames(%5B%27parent
+
