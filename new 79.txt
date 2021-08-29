@@ -1,6 +1,7 @@
 https://techcommunity.microsoft.com/t5/azure-data-factory/new-data-flow-functions-for-dynamic-reusable-patterns/bc-p/1506720/highlight/true#M188
 
 
+#new changes to original
 
 
 The documentation for the byNames function states 'Computed inputs are not supported but you can use parameter substitutions'.  This explains why you should use a parameter as input to create the array used in the byNames function:
